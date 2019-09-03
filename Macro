@@ -1,0 +1,26 @@
+Sub importarData()
+Dim LibroOrigen As Workbook
+Dim HojaOrigen As Worksheet
+
+Dim LibroDestino As Workbook
+Dim HojaDestino As Worksheet
+
+Dim Ruta As String
+
+Ruta = "C:\Users\"usuario"\Desktop\Carpeta\ArchivoExcel.xlsx"
+
+'Datos Destino
+Set LibroDestino = Workbook(ThisWorkbook.Name)
+Set HojaDestino = LibroDestino.Worksheets("Hoja1")
+
+'Datos Origen
+Set LibroOrigen = Workbook.Open(Ruta)
+Set HojaOrigen = LibroOrigen.Worksheets("Hoja1")
+
+uFila = HojaOrigen.Range("A" & Rows.Count).End(xlUp).Row
+
+'Se especifica el rango de datos que tomara para la copia y la casilla de destino donde se copiara.
+HojaOrigen.Range("A1:O" & uFila).Copy Destination:=HojaDestino.Range("A1")
+
+Workbooks(LibroOrigen.Name).Close Savechanges:=False
+End Sub
